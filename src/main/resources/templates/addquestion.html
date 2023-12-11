@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html" layout:decorate="layout/main.html">
+
+<div layout:fragment="mainContainer" class="container mt-5">
+    <form th:action="@{/addQuestion}" method="post" id="surveyForm">
+        <select class="form-select" aria-label="Default select example" name="survey">
+            <option th:each="survey : ${surveys}" th:text="${survey.getTitle()}" th:value="${survey.getId()}"></option>
+        </select>
+        <!-- Общая информация об опросе -->
+        <div class="form-group">
+            <label for="surveyTitle">Question:</label>
+            <input type="text" class="form-control" id="surveyTitle" name="question" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Create question</button>
+    </form>
+</div>
+
+</html>

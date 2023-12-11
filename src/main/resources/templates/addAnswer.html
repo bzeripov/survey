@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html" layout:decorate="layout/main.html">
+
+<div layout:fragment="mainContainer" class="container mt-5">
+    <form th:action="@{/addAnswer}" method="post" id="answersForm">
+        <select class="form-select" aria-label="Default select example" name="question3">
+            <option th:each="question : ${questions}" th:text="${question.getTitle()}" th:value="${question.getId()}"></option>
+        </select>
+        <!-- Первый объект Answer -->
+        <div class="answer">
+            <label for="answer1Text">Answer 1 Text:</label>
+            <input type="text" class="form-control" id="answer1Text" name="answers[0].text" required>
+
+            <label for="answer1Correct">Is Correct:</label>
+            <input type="checkbox" id="answer1Correct" name="answers[0].correct">
+        </div>
+
+        <!-- Второй объект Answer -->
+        <div class="answer">
+            <label for="answer2Text">Answer 2 Text:</label>
+            <input type="text" class="form-control" id="answer2Text" name="answers[1].text" required>
+
+            <label for="answer2Correct">Is Correct:</label>
+            <input type="checkbox" id="answer2Correct" name="answers[1].correct">
+        </div>
+
+        <!-- Третий объект Answer -->
+        <div class="answer">
+            <label for="answer3Text">Answer 3 Text:</label>
+            <input type="text" class="form-control" id="answer3Text" name="answers[2].text" required>
+
+            <label for="answer3Correct">Is Correct:</label>
+            <input type="checkbox" id="answer3Correct" name="answers[2].correct">
+        </div>
+
+        <!-- Кнопка для отправки формы -->
+        <button type="submit" class="btn btn-primary mt-3">Submit Answers</button>
+    </form>
+</div>
+</html>

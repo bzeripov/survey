@@ -1,0 +1,31 @@
+!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html" layout:decorate="layout/main.html">
+
+<div layout:fragment="mainContainer" class="container mt-5">
+    <div class="container mt-5">
+        <h2>Survey Details</h2>
+
+        <!-- Отображение информации об опросе -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${survey.title}"></h5>
+                <p class="card-text" th:text="${survey.description}"></p>
+
+                <!-- Отображение вопросов -->
+                <h6 class="card-subtitle mb-2 text-muted">Questions:</h6>
+                <ul th:each="question : ${survey.questions}">
+                    <li th:text="${question.title}"></li>
+                    <!-- Отображение ответов для каждого вопроса -->
+                    <ul th:each="answer : ${question.answers}">
+                        <li th:text="${answer.text}"></li>
+                    </ul>
+                </ul>
+
+                <!-- Кнопка для возврата к списку опросов -->
+                <a href="/surveys" class="btn btn-primary mt-3">Back to Surveys</a>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

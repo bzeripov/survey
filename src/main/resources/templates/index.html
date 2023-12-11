@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="layout/main.html">
+<body>
+<div layout:fragment="mainContainer" class="container">
+    <div id="updatesContainer" class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+        <div class="d-flex text-body-secondary pt-3" th:each="cm : ${test}">
+            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" th:src="@{${cm.getUsers().getAvatar()!=null?'/avatar/'+cm.getUsers().getAvatar()+'.jpg':'/avatar/default.png'}}" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom" th:text="${cm.title}">
+                <strong class="d-block text-gray-dark" th:text="${cm.getUsers().getFullname()}"></strong>
+            </p>
+        </div>
+        <small class="d-block text-end mt-3">
+            <a href="#" id="showMore">All updates</a>
+        </small>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Находим контейнер с обновлениями и ссылку "All updates"
+            var updatesContainer = document.getElementById('updatesContainer');
+            var showMoreLink = document.getElementById('showMore');
+
+            // Находим все элементы с обновлениями
+            var updates = updatesContainer.getElementsByClassName('text-body-secondary');
+
+            // Начальное количество отображаемых элементов
+            var visibleCount = 7;
+
+            // Функция, которая отображает или скрывает элементы в зависимости от visibleCount
+            function toggleUpdates() {
+                for (var i = 0; i < updates.length; i++) {
+                    if (i < visibleCount) {
+                        updates[i].classList.remove('hidden');
+                    } else {
+                        updates[i].classList.add('hidden');
+                    }
+                }
+            }
+
+            // Вызываем функцию для первоначальной настройки видимости элементов
+            toggleUpdates();
+
+            // Добавляем обработчик события на клик по ссылке "All updates"
+            showMoreLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Увеличиваем количество видимых элементов на 7
+                visibleCount += 7;
+                // Переключаем видимость элементов
+                toggleUpdates();
+            });
+        });
+    </script>
+</div>
+</body>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script><script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
+<script src="dashboard.js"></script>
+<!-- Emergency_contact end -->
+</html>
